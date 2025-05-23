@@ -17,15 +17,16 @@ use Google\Ads\GoogleAds\Lib\V18\GoogleAdsClientBuilder;
 use Google\Auth\OAuth2;
 
 try {
+    $oAuth2Credential = (new OAuth2([
+        'clientId' => 'abc123.apps.googleusercontent.com',
+        'clientSecret' => 'mySuperSecret',
+        'refreshToken' => '1//0gabcdefg'
+    ]));
+
     $googleAdsClient = (new GoogleAdsClientBuilder())
-        ->fromFile(__DIR__ . '/google_ads_php.ini') // Explicitly specify the path to config file
-        ->withDeveloperToken('WCJEYf1fuxYDj0XlmDpxnA')  // Add developer token programmatically
-        ->withOAuth2Credential((new OAuth2([
-            'clientId' => 'abc123.apps.googleusercontent.com',
-            'clientSecret' => 'mySuperSecret',
-            'refreshToken' => '1//0gabcdefg'
-        ])))
-        ->withLoginCustomerId('2448540539')
+        ->withDeveloperToken('WCJEYf1fuxYDj0XlmDpxnA')
+        ->withLoginCustomerId(2448540539)
+        ->withOAuth2Credential($oAuth2Credential)
         ->build();
 
     echo "Client ready! Authentication successful!\n";

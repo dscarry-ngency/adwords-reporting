@@ -1,0 +1,17 @@
+{
+    "name": "ngency/adwords-reporting",
+    "description": "WordPress plugin for Google Ads reporting",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=8.0.3",
+        "google/gax": "^1.17",
+        "google/protobuf": "^3.21.0",
+        "googleads/google-ads-php": "^27.2"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}
