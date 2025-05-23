@@ -38,25 +38,22 @@ class OfflineUserDataJobFailureReason
      */
     const INSUFFICIENT_TRANSACTIONS = 3;
     /**
-     * The average transaction value is unusually high for your account. If this
-     *  is intended, contact support to request an exception. Learn more at
-     *  https://support.google.com/google-ads/answer/10018944#transaction_value
+     * The average transaction value is unusually high for your account. If
+     * this is intended, contact support to request an exception.
      *
      * Generated from protobuf enum <code>HIGH_AVERAGE_TRANSACTION_VALUE = 4;</code>
      */
     const HIGH_AVERAGE_TRANSACTION_VALUE = 4;
     /**
-     * The average transaction value is unusually low for your account. If this
-     * is intended, contact support to request an exception. Learn more at
-     * https://support.google.com/google-ads/answer/10018944#transaction_value
+     * The average transaction value is unusually low for your account. If
+     * this is intended, contact support to request an exception.
      *
      * Generated from protobuf enum <code>LOW_AVERAGE_TRANSACTION_VALUE = 5;</code>
      */
     const LOW_AVERAGE_TRANSACTION_VALUE = 5;
     /**
      * There's a currency code that you haven't used before in your uploads. If
-     * this is intended, contact support to request an exception. Learn more at
-     * https://support.google.com/google-ads/answer/10018944#Unrecognized_currency
+     * this is intended, contact support to request an exception.
      *
      * Generated from protobuf enum <code>NEWLY_OBSERVED_CURRENCY_CODE = 6;</code>
      */

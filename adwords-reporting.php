@@ -9,14 +9,22 @@ Author: Your Name
 // Require Composer's autoloader
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Google\Ads\GoogleAds\Lib\V14\GoogleAdsClient;
-use Google\Ads\GoogleAds\Lib\V14\GoogleAdsClientBuilder;
-use Google\Ads\GoogleAds\Util\V14\ResourceNames;
-use Google\Ads\GoogleAds\V14\Enums\SummaryRowSettingEnum\SummaryRowSetting;
-use Google\Ads\GoogleAds\V14\Services\GoogleAdsRow;
-use Google\Ads\GoogleAds\V14\Services\SearchGoogleAdsRequest;
-use Google\Ads\GoogleAds\V14\Services\SearchGoogleAdsResponse;
-use Google\Ads\GoogleAds\V14\Services\GoogleAdsServiceClient;
+use Google\Ads\GoogleAds\Lib\V18\GoogleAdsClient;
+use Google\Ads\GoogleAds\Lib\V18\GoogleAdsClientBuilder;
+use Google\Ads\GoogleAds\Util\V18\ResourceNames;
+use Google\Ads\GoogleAds\V18\Enums\SummaryRowSettingEnum\SummaryRowSetting;
+use Google\Ads\GoogleAds\V18\Services\GoogleAdsRow;
+use Google\Ads\GoogleAds\V18\Services\SearchGoogleAdsRequest;
+use Google\Ads\GoogleAds\V18\Services\SearchGoogleAdsResponse;
+use Google\Ads\GoogleAds\V18\Services\GoogleAdsServiceClient;
+
+// Add this near the top of the file, after the plugin header
+function adwords_reporting_log($message) {
+    $log_file = plugin_dir_path(__FILE__) . 'debug.log';
+    $timestamp = date('[Y-m-d H:i:s]');
+    $log_message = $timestamp . ' ' . $message . "\n";
+    error_log($log_message, 3, $log_file);
+}
 
 // Enqueue Chart.js
 function enqueue_admin_scripts($hook) {
@@ -271,13 +279,44 @@ add_action('wp_ajax_adwords_reporting_get_campaign_data', 'adwords_reporting_get
 
 // Add OAuth2 callback handler
 function adwords_reporting_oauth_callback() {
+    // Debug: Log the current page and request
+    adwords_reporting_log('OAuth Callback Debug - Current Page: ' . (isset($_GET['page']) ? $_GET['page'] : 'not set'));
+    adwords_reporting_log('OAuth Callback Debug - Full Request: ' . print_r($_REQUEST, true));
+    adwords_reporting_log('OAuth Callback Debug - Server Variables: ' . print_r($_SERVER, true));
+
+    // Only process if we're on the settings page
+    if (!isset($_GET['page']) || $_GET['page'] !== 'adwords-reporting-settings') {
+        adwords_reporting_log('OAuth Callback Debug - Not on settings page, returning');
+        return;
+    }
+
+    // Debug: Log OAuth parameters
+    adwords_reporting_log('OAuth Callback Debug - Code: ' . (isset($_GET['code']) ? 'present' : 'not present'));
+    adwords_reporting_log('OAuth Callback Debug - Error: ' . (isset($_GET['error']) ? $_GET['error'] : 'not present'));
+
     if (!isset($_GET['code'])) {
-        wp_die('Authorization code not found');
+        // If we're not in the OAuth flow, just return
+        if (!isset($_GET['error'])) {
+            adwords_reporting_log('OAuth Callback Debug - No code or error parameter, returning');
+            return;
+        }
+        adwords_reporting_log('OAuth Callback Debug - Authorization error: ' . esc_html($_GET['error']));
+        wp_die('Authorization error: ' . esc_html($_GET['error']));
     }
 
     $client_id = get_option('adwords_reporting_client_id');
     $client_secret = get_option('adwords_reporting_client_secret');
     $redirect_uri = admin_url('admin.php?page=adwords-reporting-settings');
+
+    // Debug: Log credentials status
+    adwords_reporting_log('OAuth Callback Debug - Client ID: ' . ($client_id ? 'present' : 'missing'));
+    adwords_reporting_log('OAuth Callback Debug - Client Secret: ' . ($client_secret ? 'present' : 'missing'));
+    adwords_reporting_log('OAuth Callback Debug - Redirect URI: ' . $redirect_uri);
+
+    if (!$client_id || !$client_secret) {
+        adwords_reporting_log('OAuth Callback Debug - Missing client credentials');
+        wp_die('Missing client credentials. Please configure the plugin settings first.');
+    }
 
     $token_url = 'https://oauth2.googleapis.com/token';
     $data = [
@@ -288,22 +327,39 @@ function adwords_reporting_oauth_callback() {
         'grant_type' => 'authorization_code'
     ];
 
+    // Debug: Log token request data (excluding sensitive info)
+    adwords_reporting_log('OAuth Callback Debug - Token Request Data: ' . print_r(array_merge($data, ['client_secret' => 'REDACTED']), true));
+
     $response = wp_remote_post($token_url, [
-        'body' => $data
+        'body' => $data,
+        'timeout' => 30
     ]);
 
     if (is_wp_error($response)) {
+        adwords_reporting_log('OAuth Token Error: ' . $response->get_error_message());
         wp_die('Error getting access token: ' . $response->get_error_message());
     }
 
     $body = json_decode(wp_remote_retrieve_body($response), true);
+    
+    // Debug: Log response status and body
+    adwords_reporting_log('OAuth Callback Debug - Response Status: ' . wp_remote_retrieve_response_code($response));
+    adwords_reporting_log('OAuth Callback Debug - Response Body: ' . print_r($body, true));
+
+    if (isset($body['error'])) {
+        adwords_reporting_log('OAuth Response Error: ' . print_r($body, true));
+        wp_die('Error from Google: ' . esc_html($body['error_description'] ?? $body['error']));
+    }
+
     if (isset($body['refresh_token'])) {
+        adwords_reporting_log('OAuth Callback Debug - Successfully received refresh token');
         update_option('adwords_reporting_refresh_token', $body['refresh_token']);
         wp_redirect(admin_url('admin.php?page=adwords-reporting-settings&oauth_success=1'));
         exit;
     }
 
-    wp_die('Error: No refresh token received');
+    adwords_reporting_log('OAuth Callback Debug - No refresh token in response');
+    wp_die('Error: No refresh token received. Please try again.');
 }
 add_action('admin_init', 'adwords_reporting_oauth_callback');
 
@@ -347,7 +403,17 @@ function adwords_reporting_settings_page() {
                 <div class="oauth-section">
                     <h2>Google Ads Authentication</h2>
                     <?php if (!get_option('adwords_reporting_refresh_token')): ?>
-                        <a href="https://accounts.google.com/o/oauth2/auth?client_id=<?php echo urlencode(get_option('adwords_reporting_client_id')); ?>&redirect_uri=<?php echo urlencode(admin_url('admin.php?page=adwords-reporting-settings')); ?>&scope=https://www.googleapis.com/auth/adwords&response_type=code&access_type=offline&prompt=consent" class="button button-primary">
+                        <?php
+                        $auth_url = 'https://accounts.google.com/o/oauth2/auth?' . http_build_query([
+                            'client_id' => get_option('adwords_reporting_client_id'),
+                            'redirect_uri' => admin_url('admin.php?page=adwords-reporting-settings'),
+                            'scope' => 'https://www.googleapis.com/auth/adwords',
+                            'response_type' => 'code',
+                            'access_type' => 'offline',
+                            'prompt' => 'consent'
+                        ]);
+                        ?>
+                        <a href="<?php echo esc_url($auth_url); ?>" class="button button-primary">
                             Connect Google Ads Account
                         </a>
                     <?php else: ?>

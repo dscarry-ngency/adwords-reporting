@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * The annotations for the keyword plan keywords.
+ * The Annotations for the Keyword plan keywords.
  *
  * Generated from protobuf message <code>google.ads.googleads.v13.common.KeywordAnnotations</code>
  */
