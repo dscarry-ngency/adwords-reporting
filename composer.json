@@ -6,7 +6,7 @@
         "php": ">=8.0.3",
         "google/gax": "^1.17",
         "google/protobuf": "^3.21.0",
-        "googleads/google-ads-php": "^27.2"
+        "googleads/google-ads-php": "^19.0"
     },
     "config": {
         "optimize-autoloader": true,

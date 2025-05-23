@@ -1,0 +1,106 @@
+/* Table container */
+.adwords-reporting .table-container {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    margin-bottom: var(--spacing-lg);
+    overflow-x: auto;
+}
+
+/* Table styles */
+.adwords-reporting .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-base);
+}
+
+.adwords-reporting .table th,
+.adwords-reporting .table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.adwords-reporting .table th {
+    background-color: var(--color-background);
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.adwords-reporting .table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Table hover effect */
+.adwords-reporting .table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Table responsive */
+@media screen and (max-width: 782px) {
+    .adwords-reporting .table th,
+    .adwords-reporting .table td {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+}
+
+/* Table sorting */
+.adwords-reporting .table th.sortable {
+    cursor: pointer;
+    position: relative;
+    padding-right: var(--spacing-xl);
+}
+
+.adwords-reporting .table th.sortable::after {
+    content: "↕";
+    position: absolute;
+    right: var(--spacing-sm);
+    color: var(--color-text-light);
+}
+
+.adwords-reporting .table th.sortable.asc::after {
+    content: "↑";
+}
+
+.adwords-reporting .table th.sortable.desc::after {
+    content: "↓";
+}
+
+/* Table pagination */
+.adwords-reporting .table-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border);
+}
+
+.adwords-reporting .table-pagination-info {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+}
+
+.adwords-reporting .table-pagination-controls {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.adwords-reporting .table-pagination-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.adwords-reporting .table-pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.adwords-reporting .table-pagination-btn.active {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+} 

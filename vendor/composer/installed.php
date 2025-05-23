@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'ngency/adwords-reporting',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'f30e703da53b54d9cf1d51b65264e865e04d99a3',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -83,9 +83,9 @@
             'dev_requirement' => false,
         ),
         'googleads/google-ads-php' => array(
-            'pretty_version' => 'v27.2.0',
-            'version' => '27.2.0.0',
-            'reference' => 'dc771d874d31d4f2ceecd106bdd246e79d534aaa',
+            'pretty_version' => 'v19.2.0',
+            'version' => '19.2.0.0',
+            'reference' => '2ae4c1b81bb4792e4711dcf150faddba80e9bdf0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../googleads/google-ads-php',
             'aliases' => array(),
@@ -137,9 +137,9 @@
             'dev_requirement' => false,
         ),
         'ngency/adwords-reporting' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'f30e703da53b54d9cf1d51b65264e865e04d99a3',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -1,0 +1,58 @@
+:root {
+    /* Colors */
+    --color-primary: #2271b1;
+    --color-secondary: #135e96;
+    --color-success: #00a32a;
+    --color-warning: #dba617;
+    --color-error: #d63638;
+    --color-text: #1d2327;
+    --color-text-light: #50575e;
+    --color-border: #dcdcde;
+    --color-background: #f0f0f1;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Typography */
+    --font-size-base: 13px;
+    --font-size-sm: 12px;
+    --font-size-lg: 14px;
+    --line-height-base: 1.5;
+}
+
+/* Base styles */
+.adwords-reporting {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text);
+}
+
+/* Layout containers */
+.adwords-reporting .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+.adwords-reporting .grid {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+/* Responsive breakpoints */
+@media screen and (min-width: 782px) {
+    .adwords-reporting .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .adwords-reporting .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+} 

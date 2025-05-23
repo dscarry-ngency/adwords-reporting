@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5904a1edb0e99abbde81df548faca51c",
+    "content-hash": "f8801450e48063a58d9fb3a2e8bb115f",
     "packages": [
         {
             "name": "brick/math",
@@ -441,24 +441,24 @@
         },
         {
             "name": "googleads/google-ads-php",
-            "version": "v27.2.0",
+            "version": "v19.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleads/google-ads-php.git",
-                "reference": "dc771d874d31d4f2ceecd106bdd246e79d534aaa"
+                "reference": "2ae4c1b81bb4792e4711dcf150faddba80e9bdf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleads/google-ads-php/zipball/dc771d874d31d4f2ceecd106bdd246e79d534aaa",
-                "reference": "dc771d874d31d4f2ceecd106bdd246e79d534aaa",
+                "url": "https://api.github.com/repos/googleads/google-ads-php/zipball/2ae4c1b81bb4792e4711dcf150faddba80e9bdf0",
+                "reference": "2ae4c1b81bb4792e4711dcf150faddba80e9bdf0",
                 "shasum": ""
             },
             "require": {
-                "google/gax": "^1.19.1",
-                "google/protobuf": "^3.21.5 || ^4.26",
+                "google/gax": "^1.13.0",
+                "google/protobuf": "^3.21.5",
                 "grpc/grpc": "^1.36.0",
                 "monolog/monolog": "^1.26 || ^2.0 || ^3.0",
-                "php": ">=8.1"
+                "php": ">=7.4"
             },
             "require-dev": {
                 "composer/composer": "^2.0",
@@ -498,9 +498,9 @@
             "homepage": "https://github.com/googleads/google-ads-php",
             "support": {
                 "issues": "https://github.com/googleads/google-ads-php/issues",
-                "source": "https://github.com/googleads/google-ads-php/tree/v27.2.0"
+                "source": "https://github.com/googleads/google-ads-php/tree/v19.2.0"
             },
-            "time": "2025-05-14T20:03:29+00:00"
+            "time": "2023-06-08T14:17:45+00:00"
         },
         {
             "name": "grpc/grpc",

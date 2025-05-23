@@ -1,0 +1,61 @@
+/* Chart container styles */
+.adwords-reporting .chart-container {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.adwords-reporting .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.adwords-reporting .chart-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0;
+}
+
+.adwords-reporting .chart-legend {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-sm);
+}
+
+.adwords-reporting .chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+.adwords-reporting .chart-legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* Chart loading state */
+.adwords-reporting .chart-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: var(--color-text-light);
+}
+
+/* Chart error state */
+.adwords-reporting .chart-error {
+    padding: var(--spacing-md);
+    color: var(--color-error);
+    text-align: center;
+    border: 1px solid var(--color-error);
+    border-radius: 4px;
+    background-color: rgba(214, 54, 56, 0.1);
+} 
