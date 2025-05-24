@@ -89,4 +89,58 @@
 
 .adwords-reporting .form-control.is-invalid:focus {
     box-shadow: 0 0 0 1px var(--color-error);
+}
+
+.adwords-reporting .oauth-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.adwords-reporting .oauth-section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #1d2327;
+}
+
+.adwords-reporting .oauth-section .description {
+    margin: 10px 0;
+    color: #666;
+}
+
+.adwords-reporting .oauth-section .button {
+    margin-right: 10px;
+}
+
+.adwords-reporting .notice {
+    margin: 20px 0;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.adwords-reporting .notice-success {
+    background: #f0f6e9;
+    border-left: 4px solid #72a93c;
+}
+
+.adwords-reporting .notice-error {
+    background: #f8d7da;
+    border-left: 4px solid #d63638;
+}
+
+.adwords-reporting .form-table th {
+    width: 200px;
+}
+
+.adwords-reporting .form-table td {
+    padding: 15px 10px;
+}
+
+.adwords-reporting .form-table .description {
+    margin-top: 5px;
+    color: #666;
+    font-style: italic;
 } 

@@ -1,3 +1,33 @@
-# Ignore Google Ads credentials
-google_ads_php.ini 
-node_modules
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build files
+*.zip
+*.tar.gz
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+debug.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Test files
+/tests/
+/phpunit.xml
+/phpunit.xml.dist
+
+# Cache
+.cache/
